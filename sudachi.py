@@ -1,13 +1,14 @@
 import re
 
-from sudachipy import tokenizer, dictionary
+import sudachidict_core
+from sudachipy import Tokenizer, Dictionary, Morpheme
 
 
 class SudachiToken:
-    def __init__(self) -> None:
-        self.surface = ""
-        self.pos = ""
-        self.reading = ""
+    def __init__(self, morpheme: Morpheme) -> None:
+        self.surface = morpheme.surface()
+        self.pos = morpheme.part_of_speech()[0]
+        self.reading = morpheme.reading_form()
 
     def get_katakana_surface(self) -> str:
         return "".join([chr(ord(c) + 96) if (0x3041 <= ord(c) <= 0x3094) else c for c in self.surface])
@@ -48,7 +49,7 @@ class ParsedLine:
 
 def tokenize(lines:list[str], ignore_paren:bool=False) -> list[ParsedLine]:
     reg = re.compile(r"\(.+?\)|\[.+?\]|\uff08.+?\uff09|\uff3b.+?\uff3d")
-    tknzr = dictionary.Dictionary().create()
+    tknzr = Dictionary().create()
     out = []
     for line in lines:
         pl = ParsedLine()
@@ -57,11 +58,10 @@ def tokenize(lines:list[str], ignore_paren:bool=False) -> list[ParsedLine]:
                 pl.line = reg.sub("", line)
             else:
                 pl.line = line
-            for t in tknzr.tokenize(pl.line, tokenizer.Tokenizer.SplitMode.C):
-                st = SudachiToken()
-                st.surface = t.surface()
-                st.pos = t.part_of_speech()[0]
-                st.reading = t.reading_form()
+            for morpheme in tknzr.tokenize(pl.line, Tokenizer.SplitMode.C):
+                st = SudachiToken(morpheme)
                 pl.tokens.append(st)
         out.append(pl)
     return out
+
+

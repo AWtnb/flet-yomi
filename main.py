@@ -1,11 +1,12 @@
 import os
+from webbrowser import open
 
 import flet as ft
 from sudachi import TokensReader, tokenize
 
 
 def main(page: ft.Page):
-    page.title = "SudachiPy"
+    page.title = "flet-yomi"
 
     contents = ft.Ref[ft.Text]()
     copy_button = ft.Ref[ft.ElevatedButton]()
@@ -51,11 +52,13 @@ def main(page: ft.Page):
     ###################################
 
     ui_cols = [
-        ft.Text(
-            "github.com/AWtnb/flet_sudachiPy",
-            style="labelSmall",
-            weight="bold",
-            color=ft.colors.BLUE_400,
+        ft.Container(
+            content=ft.IconButton(
+                icon=ft.icons.SOURCE_OUTLINED,
+                icon_color=ft.colors.BLUE_400,
+                on_click=lambda _:open("https://github.com/AWtnb/flet_yomi"),
+            ),
+            alignment=ft.alignment.top_right
         ),
         ft.TextField(
             ref=contents,
@@ -78,4 +81,4 @@ def main(page: ft.Page):
     page.add(ft.Column(controls=ui_cols))
 
 
-ft.app(target=main)
+ft.app(target=main, assets_dir="assets")
