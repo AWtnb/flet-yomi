@@ -66,6 +66,7 @@ def main(page: ft.Page):
             multiline=True,
             autofocus=True,
             value="",
+            max_lines=10
         ),
         ft.Row(controls=[
             ft.FilledButton("GO!", on_click=execute),
@@ -75,7 +76,10 @@ def main(page: ft.Page):
         ft.Divider(),
         ft.ElevatedButton(ref=copy_button, text="COPY!",
                           on_click=copy_table, visible=False),
-        ft.DataTable(ref=result_table)
+        ft.ListView(
+            controls = [ft.DataTable(ref=result_table)],
+            height=250,
+        ),
     ]
 
     page.add(ft.Column(controls=ui_cols))
