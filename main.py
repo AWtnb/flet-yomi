@@ -11,6 +11,7 @@ def main(page: ft.Page):
     contents = ft.Ref[ft.Text]()
     copy_button = ft.Ref[ft.ElevatedButton]()
     is_ignore_paren = ft.Ref[ft.Switch]()
+    is_focus_name = ft.Ref[ft.Switch]()
     result_table = ft.Ref[ft.DataTable]()
 
     ###################################
@@ -27,10 +28,12 @@ def main(page: ft.Page):
                 ft.DataColumn(ft.Text("Detail")),
             ]
             table_rows = []
-            for parsed_line in tokenize(contents.current.value.strip().splitlines(), is_ignore_paren.current.value):
+            parsed_lines = tokenize(contents.current.value.strip().splitlines(
+            ), is_ignore_paren.current.value, is_focus_name.current.value)
+            for parsed_line in parsed_lines:
                 reader = TokensReader(parsed_line.tokens)
                 table_rows.append(ft.DataRow(cells=[
-                    ft.DataCell(ft.Text(parsed_line.line)),
+                    ft.DataCell(ft.Text(parsed_line.raw_line)),
                     ft.DataCell(ft.Text(reader.get_reading())),
                     ft.DataCell(ft.Text(reader.get_detail())),
                 ]))
@@ -52,33 +55,51 @@ def main(page: ft.Page):
     ###################################
 
     ui_cols = [
-        ft.Container(
-            content=ft.IconButton(
-                icon=ft.icons.SOURCE_OUTLINED,
-                icon_color=ft.colors.BLUE_400,
-                on_click=lambda _:open("https://github.com/AWtnb/flet_yomi"),
+        ft.Row(controls=[
+            ft.Container(
+                content=ft.Text("YOMI", size=40, weight=ft.FontWeight.BOLD, italic=True),
+                alignment=ft.alignment.top_left
             ),
-            alignment=ft.alignment.top_right
-        ),
+            ft.Container(
+                content=ft.IconButton(
+                    icon=ft.icons.SOURCE_OUTLINED,
+                    icon_color=ft.colors.BLUE_400,
+                    on_click=lambda _:open(
+                        "https://github.com/AWtnb/flet_yomi"),
+                ),
+                alignment=ft.alignment.top_right
+            ),
+        ],alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
         ft.TextField(
             ref=contents,
             label="input here!",
             multiline=True,
             autofocus=True,
             value="",
-            max_lines=10
+            max_lines=6
         ),
         ft.Row(controls=[
-            ft.FilledButton("GO!", on_click=execute),
             ft.Switch(ref=is_ignore_paren,
                       label="Skip inside: () / []", value=True),
+            ft.Switch(ref=is_focus_name,
+                      label="Skip nombles or reference (for book index)", value=True),
+        ]),
+        ft.Row(controls=[
+            ft.ElevatedButton("GO!", on_click=execute, style=ft.ButtonStyle(
+                color={"": ft.colors.WHITE},
+                bgcolor={"": ft.colors.WHITE30},
+                side={
+                    ft.MaterialState.HOVERED: ft.border.BorderSide(2, ft.colors.RED_ACCENT),
+                    ft.MaterialState.FOCUSED: ft.border.BorderSide(2, ft.colors.RED_ACCENT),
+                }
+            )),
         ]),
         ft.Divider(),
-        ft.ElevatedButton(ref=copy_button, text="COPY!",
-                          on_click=copy_table, visible=False),
+        ft.FilledButton(ref=copy_button, text="COPY!",
+                        on_click=copy_table, visible=False),
         ft.ListView(
-            controls = [ft.DataTable(ref=result_table)],
-            height=250,
+            controls=[ft.DataTable(ref=result_table)],
+            height=400
         ),
     ]
 

@@ -1,4 +1,6 @@
-# Get Japanese reading with [SudachiPy](https://github.com/WorksApplications/SudachiPy)
+# README
+
+[Flet](https://flet.dev/) desktop-app to extract Japanese reading with [SudachiPy](https://github.com/WorksApplications/SudachiPy) .
 
 ![img](./images/demo.png)
 
@@ -26,8 +28,9 @@
     ```
 
 1. Run below command.
-    + Use `pyinstaller` command insread of `flet pack` because `flet` command does not accept multiple `--add-data`.
 
     ```
     pyinstaller --onefile --name yomi --add-data assets\sudachidict_core;sudachidict_core --add-data assets\sudachipy;sudachipy --noconsole main.py
     ```
+
+    + Use `pyinstaller` command insread of `flet pack` because `flet` command does not accept multiple `--add-data`.

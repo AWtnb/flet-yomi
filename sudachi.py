@@ -1,6 +1,6 @@
 import re
 
-import sudachidict_core
+import sudachidict_core # not used in this module, but required to build single binary.
 from sudachipy import Tokenizer, Dictionary, Morpheme
 
 
@@ -43,21 +43,32 @@ class TokensReader:
         return " / ".join([token.detail for token in self.tokens])
 
 class ParsedLine:
-    def __init__(self) -> None:
-        self.line = ""
+    def __init__(self, line:str) -> None:
+        self.raw_line = line
+        self.line = line
         self.tokens = []
 
-def tokenize(lines:list[str], ignore_paren:bool=False) -> list[ParsedLine]:
-    reg = re.compile(r"\(.+?\)|\[.+?\]|\uff08.+?\uff09|\uff3b.+?\uff3d")
+    def trim_paren(self) -> None:
+        reg_paren = re.compile(r"\(.+?\)|\[.+?\]|\uff08.+?\uff09|\uff3b.+?\uff3d")
+        self.line = reg_paren.sub("", self.line)
+
+    def trim_noise(self) -> None:
+        reg_noise = re.compile(r"　　[^\d]?\d.*$|　→.+$")
+        self.line = reg_noise.sub("", self.line)
+
+def tokenize(lines:list[str], ignore_paren:bool=False, focus_name:bool=False) -> list[ParsedLine]:
     tknzr = Dictionary().create()
     out = []
     for line in lines:
-        pl = ParsedLine()
-        if line:
+        pl = None
+        if len(line.strip()) < 1:
+            pl = ParsedLine("")
+        else:
+            pl = ParsedLine(line)
             if ignore_paren:
-                pl.line = reg.sub("", line)
-            else:
-                pl.line = line
+                pl.trim_paren()
+            if focus_name:
+                pl.trim_noise()
             for morpheme in tknzr.tokenize(pl.line, Tokenizer.SplitMode.C):
                 st = SudachiToken(morpheme)
                 pl.tokens.append(st)
