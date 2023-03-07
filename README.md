@@ -12,6 +12,16 @@
     pip install sudachipy sudachidict_core pyinstaller
     ```
 
+1. Create a directory named `assets` in the same directory as `main.py`.
+
+    ```
+    .\
+    │  main.py
+    │  sudachi.py
+    │
+    └─assets
+    ```
+
 1. Find `sudachipy` and `sudachidict_core` folder inside Python site-package folder and copy them into `assets` folder.
 
     ```
@@ -34,3 +44,18 @@
     ```
 
     + Use `pyinstaller` command insread of `flet pack` because `flet` command does not accept multiple `--add-data`.
+
+---
+
+When running a build using pyinstaller installed with `pip install pyinstaller`, the generated `.exe` file may be considered a virus by Windows Defender.
+In this case, using a locally built pyinstaller may solve the problem.
+
+Steps:
+
+1. `git clone https://github.com/pyinstaller/pyinstaller`
+1. `cd .\pyinstaller\bootloader\`
+1. `python ./waf all`
+1. `pip install .`
+
+This will build pyinstaller in the python site-package folder.
+The folder used for the build is no longer used, so you can delete it.
