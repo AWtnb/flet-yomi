@@ -52,6 +52,9 @@ In this case, using a locally built pyinstaller may solve the problem.
 
 Steps:
 
+1. `scoop install vcredist2015`
+    + For Windows user, install the Visual Studio C++ compiler using [Scoop](https://scoop.sh/).
+    + In my environment, 2015 and 2022 were installed. If just installing vcredist2015 results in error, try installing the latest version as well.
 1. `git clone https://github.com/pyinstaller/pyinstaller`
 1. `cd .\pyinstaller\bootloader\`
 1. `python .\waf all`
