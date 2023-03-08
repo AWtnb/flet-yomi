@@ -43,7 +43,7 @@
     pyinstaller --onefile --name yomi --add-data assets\sudachidict_core;sudachidict_core --add-data assets\sudachipy;sudachipy --noconsole main.py
     ```
 
-    + Use `pyinstaller` command insread of `flet pack` because `flet` command does not accept multiple `--add-data`.
+    + Use `pyinstaller` command instead of `flet pack` because `flet` command does not accept multiple `--add-data`.
 
 ---
 
@@ -54,7 +54,7 @@ Steps:
 
 1. `git clone https://github.com/pyinstaller/pyinstaller`
 1. `cd .\pyinstaller\bootloader\`
-1. `python ./waf all`
+1. `python .\waf all`
 1. `pip install .`
 
 This will build pyinstaller in the python site-package folder.
