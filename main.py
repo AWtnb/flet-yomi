@@ -28,8 +28,10 @@ def main(page: ft.Page):
                 ft.DataColumn(ft.Text("Detail")),
             ]
             table_rows = []
-            parsed_lines = tokenize(contents.current.value.strip().splitlines(
-            ), is_ignore_paren.current.value, is_focus_name.current.value)
+            parsed_lines = tokenize(
+                contents.current.value.strip().splitlines(),
+                is_ignore_paren.current.value,
+                is_focus_name.current.value)
             for parsed_line in parsed_lines:
                 reader = TokensReader(parsed_line.tokens)
                 table_rows.append(ft.DataRow(cells=[
@@ -57,7 +59,8 @@ def main(page: ft.Page):
     ui_cols = [
         ft.Row(controls=[
             ft.Container(
-                content=ft.Text("YOMI", size=40, weight=ft.FontWeight.BOLD, italic=True),
+                content=ft.Text("YOMI", size=40,
+                                weight=ft.FontWeight.BOLD, italic=True),
                 alignment=ft.alignment.top_left
             ),
             ft.Container(
@@ -69,7 +72,7 @@ def main(page: ft.Page):
                 ),
                 alignment=ft.alignment.top_right
             ),
-        ],alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+        ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
         ft.TextField(
             ref=contents,
             label="input here!",
@@ -87,7 +90,7 @@ def main(page: ft.Page):
         ft.Row(controls=[
             ft.ElevatedButton("GO!", on_click=execute, style=ft.ButtonStyle(
                 color={"": ft.colors.WHITE},
-                bgcolor={"": ft.colors.WHITE30},
+                bgcolor={"": ft.colors.BLUE_ACCENT_700},
                 side={
                     ft.MaterialState.HOVERED: ft.border.BorderSide(2, ft.colors.RED_ACCENT),
                     ft.MaterialState.FOCUSED: ft.border.BorderSide(2, ft.colors.RED_ACCENT),
