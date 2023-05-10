@@ -12,17 +12,7 @@
     pip install sudachipy sudachidict_core pyinstaller
     ```
 
-1. Create a directory named `assets` in the same directory as `main.py`.
-
-    ```
-    .\
-    │  main.py
-    │  sudachi.py
-    │
-    └─assets
-    ```
-
-1. Find `sudachipy` and `sudachidict_core` folder inside Python site-package folder and copy them into `assets` folder.
+1. Find `sudachipy` and `sudachidict_core` folder inside Python site-packages folder and copy them into `assets` folder.
 
     ```
     .\

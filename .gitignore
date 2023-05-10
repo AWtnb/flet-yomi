@@ -1,5 +1,6 @@
 build/
 dist/
-assets/
+assets/*
+!assets/.gitkeep
 *.exe
 *.spec
