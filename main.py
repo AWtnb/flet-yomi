@@ -68,7 +68,7 @@ def main(page: ft.Page):
                     icon=ft.icons.SOURCE_OUTLINED,
                     icon_color=ft.colors.BLUE_400,
                     on_click=lambda _:open(
-                        "https://github.com/AWtnb/flet_yomi"),
+                        "https://github.com/AWtnb/flet-yomi"),
                 ),
                 alignment=ft.alignment.top_right
             ),
