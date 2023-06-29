@@ -48,6 +48,7 @@ Steps:
     + Visual Studio C++ compiler is required for build.
         + It can be installed with [Scoop](https://scoop.sh/) : `scoop install vcredist2015` .
     + In my environment, 2015 and 2022 were installed. If just installing vcredist2015 results in error, try installing the latest version as well.
+1. `cd ..` (move to `pyinstaller` directory)
 1. `pip install .`
 
 This will build pyinstaller in the python site-package folder.
