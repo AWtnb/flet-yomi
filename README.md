@@ -53,3 +53,8 @@ Steps:
 
 This will build pyinstaller in the python site-package folder.
 The folder used for the build is no longer used, so you can delete it.
+
+
+---
+
+[Sudachi](https://github.com/WorksApplications/Sudachi/) and [SudachiDict](https://github.com/WorksApplications/SudachiDict) are both licensed under the [Apache License, Version2.0](http://www.apache.org/licenses/LICENSE-2.0.html) .
