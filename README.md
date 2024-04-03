@@ -12,28 +12,23 @@
     pip install sudachipy sudachidict_core pyinstaller
     ```
 
-1. Find `sudachipy` and `sudachidict_core` folder inside Python site-packages folder and copy them into `assets` folder.
+1. Remove pathlib module for pyinstaller compatibility:
 
     ```
-    .\
-    │  main.py
-    │  sudachi.py
-    │
-    └─assets
-        ├─sudachidict_core
-        │  └─...
-        │
-        └─sudachipy
-            └─...
+    python -m pip uninstall pathlib
     ```
 
-1. Run below command.
+1. Run:
 
     ```
-    pyinstaller --onefile --name yomi --add-data assets\sudachidict_core;sudachidict_core --add-data assets\sudachipy;sudachipy --noconsole main.py
+    pyinstaller --onefile --name yomi --collect-data sudachidict_core --collect-data sudachipy --noconsole main.py
     ```
 
-    + Use `pyinstaller` command instead of `flet pack` because `flet` command does not accept multiple `--add-data`.
+1. Re-install pathlib:
+
+    ```
+    python -m pip install pathlib
+    ```
 
 ---
 
