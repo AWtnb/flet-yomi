@@ -86,18 +86,6 @@ def main(page: ft.Page):
         ),
         ft.Row(
             controls=[
-                ft.Switch(
-                    ref=is_ignore_paren, label="Skip inside: () / []", value=True
-                ),
-                ft.Switch(
-                    ref=is_focus_name,
-                    label="Skip nombles or reference (for book index)",
-                    value=True,
-                ),
-            ]
-        ),
-        ft.Row(
-            controls=[
                 ft.ElevatedButton(
                     "GO!",
                     on_click=execute,
@@ -113,6 +101,18 @@ def main(page: ft.Page):
                             ),
                         },
                     ),
+                ),
+            ]
+        ),
+        ft.Row(
+            controls=[
+                ft.Switch(
+                    ref=is_ignore_paren, label="Skip inside: () / []", value=True
+                ),
+                ft.Switch(
+                    ref=is_focus_name,
+                    label="Skip nombles or reference (for book index)",
+                    value=True,
                 ),
             ]
         ),
