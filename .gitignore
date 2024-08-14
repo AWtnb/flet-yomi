@@ -5,3 +5,4 @@ assets/*
 *.exe
 *.spec
 __pycache__/
+.venv/
