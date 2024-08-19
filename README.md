@@ -23,13 +23,7 @@ python -m venv .venv
 1. Install SudachiPy, SudachiDict-core
 
     ```
-    pip install sudachipy sudachidict_core
-    ```
-
-1. If installed, remove pathlib module for pyinstaller compatibility:
-
-    ```
-    python -m pip uninstall pathlib -y
+    python -m pip install sudachipy sudachidict_core
     ```
 
 1. Run:
@@ -38,11 +32,8 @@ python -m venv .venv
     pyinstaller --onefile --name yomi --collect-data sudachidict_core --collect-data sudachipy --noconsole main.py
     ```
 
-1. Re-install pathlib:
-
-    ```
-    python -m pip install pathlib
-    ```
+    - If error was raised around pathlib, uninstall it: `python -m pip uninstall pathlib -y`
+    - After build, re-install: `python -m pip install pathlib`
 
 1. Exit from venv
 
