@@ -12,18 +12,20 @@ Create venv.
 python -m venv .venv
 ```
 
+Install packages:
+
+```
+python -m pip install flet
+python -m pip install sudachipy
+python -m pip install sudachidict_core
+```
+
 ### Steps
 
 1. Enter venv
 
     ```
     .\.venv\Scripts\activate
-    ```
-
-1. Install SudachiPy, SudachiDict-core
-
-    ```
-    python -m pip install sudachipy sudachidict_core
     ```
 
 1. Run:
