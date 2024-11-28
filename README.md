@@ -24,28 +24,45 @@ python -m pip install sudachidict_core
 
 Build pyinstaller locally (`.exe` generated with pip-installed pyinstaller is often considered as virus by security soft):
 
-1. `git clone https://github.com/pyinstaller/pyinstaller`
-1. `cd .\pyinstaller\bootloader\`
-1. `python .\waf all`
-    - Build would fail, but it is ignorable.
+1. Clone pyinstaller from Github.
+
+    ```
+    git clone https://github.com/pyinstaller/pyinstaller
+    ```
+
+1. Move to installed dir.
+
+    ```
+    cd .\pyinstaller\bootloader\
+    ```
+
+1. Run command:
+
+    ```
+    python .\waf all
+    ```
+
+    - **Build would fail, but it is ignorable.**
     - Visual Studio C++ compiler is required for build.
         - It can be installed with [Scoop](https://scoop.sh/) : `scoop install vcredist2015` .
     - In my environment, 2015 and 2022 were installed. If just installing vcredist2015 results in error, try installing the latest version as well.
-1. `cd ..` (move to `pyinstaller` directory)
-1. `pip install .`
+1. Move to `pyinstaller` directory
+
+    ```
+    cd ..
+    ```
+
+
+1. Install locally build pyinstaller.
+
+    ```
+    pip install .
+    ```
+
 1. Delete `pyinstaller` folder.
     - This folder is used only for package build and no longer used.
 
-
-### Build `yomi.exe`
-
-1. Enter venv ([skippable on VSCode](https://github.com/microsoft/vscode-python/wiki/Activate-Environments-in-Terminal-Using-Environment-Variables))
-
-    ```
-    .\.venv\Scripts\activate
-    ```
-
-1. Run:
+1. Run pyinstaller
 
     ```
     pyinstaller --onefile --name yomi --collect-data sudachidict_core --collect-data sudachipy --noconsole main.py
@@ -54,11 +71,7 @@ Build pyinstaller locally (`.exe` generated with pip-installed pyinstaller is of
     - If error was raised around pathlib, uninstall it: `python -m pip uninstall pathlib -y`
     - After build, re-install: `python -m pip install pathlib`
 
-1. Exit from venv ([skippable on VSCode](https://github.com/microsoft/vscode-python/wiki/Activate-Environments-in-Terminal-Using-Environment-Variables))
 
-    ```
-    deactivate
-    ```
 
 ---
 
