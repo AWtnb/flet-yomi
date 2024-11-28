@@ -93,10 +93,10 @@ def main(page: ft.Page):
                         color={"": ft.colors.WHITE},
                         bgcolor={"": ft.colors.BLUE_ACCENT_700},
                         side={
-                            ft.MaterialState.HOVERED: ft.border.BorderSide(
+                            ft.ControlState.HOVERED: ft.border.BorderSide(
                                 2, ft.colors.RED_ACCENT
                             ),
-                            ft.MaterialState.FOCUSED: ft.border.BorderSide(
+                            ft.ControlState.FOCUSED: ft.border.BorderSide(
                                 2, ft.colors.RED_ACCENT
                             ),
                         },
